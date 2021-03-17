@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-card',
@@ -9,14 +10,15 @@ import { HttpClient } from '@angular/common/http'
 export class CardComponent implements OnInit {
 
   @Input() card;
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
   }
 
   onLike(card: any){
     card.likes = card.likes+1;
-    this.httpClient.put('/api/skills', card).subscribe();
+    this.httpClient.put('/api/skills', card).subscribe(() => {
+    });
   }
 
   onShare(card: any){
